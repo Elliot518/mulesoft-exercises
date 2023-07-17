@@ -1,0 +1,35 @@
+#%RAML 1.0
+title: Price API
+
+types:
+  AmericanFlight: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flight-data-type/1.0.1/AmericanFlightDataType.raml
+
+/price:
+
+  /solded-seats:
+    post:
+      description: Calculate and retrieve the total price of solded seats, grouped by airplane
+      body:
+        application/json:
+          type: AmericanFlight[]
+          examples:
+            input: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flights-example/1.0.1/AmericanFlightsExample.raml
+      
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  "destination": "LAX",
+                  "planes": [
+                    {
+                      "type": "Boeing 777",
+                      "pricePerSeat": "180000$"
+                    },
+                    {
+                      "type": "Boeing 787",
+                      "pricePerSeat": "108200$"
+                    }
+                  ]
+                }
