@@ -1,0 +1,21 @@
+#%RAML 1.0
+title: Calculator API
+
+/calculators:
+
+    /{operator}:
+      post:
+        body:
+          application/json:
+            example:
+              {
+                first: 2,
+                second: 8
+              }
+        responses:
+          200:
+            body:
+              application/json:
+                examples:
+                  success: !include examples/successExample.raml
+                  error: !include examples/errorExample.raml
