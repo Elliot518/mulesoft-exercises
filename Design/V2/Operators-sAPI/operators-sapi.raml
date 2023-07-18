@@ -1,0 +1,94 @@
+#%RAML 1.0
+title: Operator API
+
+/add:
+  post:
+    body:
+      application/json:
+        example:
+          {
+            first: 2,
+            second: 8
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "code": "200",
+                "message": "Add Operation Success",
+                "data": {
+                  "result": 10
+                }
+              }
+                
+                
+/subtract:
+  post:
+    body:
+      application/json:
+        example:
+          {
+            first: 8,
+            second: 2
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "code": "200",
+                "message": "Subtract Operation Success",
+                "data": {
+                  "result": 6
+                }
+              }
+
+
+/multiply:
+  post:
+    body:
+      application/json:
+        example:
+          {
+            first: 5,
+            second: 5
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "code": "200",
+                "message": "Multiply Operation Success",
+                "data": {
+                  "result": 25
+                }
+              }
+
+
+/divide:
+  post:
+    body:
+      application/json:
+        example:
+          {
+            first: 20,
+            second: 10
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "code": "200",
+                "message": "Divide Operation Success",
+                "data": {
+                  "result": 2
+                }
+              }
+            
