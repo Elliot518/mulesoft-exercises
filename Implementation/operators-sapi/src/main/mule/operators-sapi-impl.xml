@@ -38,4 +38,36 @@ output application/json
 			</ee:message>
 		</ee:transform>
 	</flow>
+	<flow name="operators-sapi-subtractFlow" doc:id="f0bfb7c9-442c-4294-ac86-44447e937492" >
+		<ee:transform doc:name="Transform Message" doc:id="f710e07c-6e48-4592-a143-c7b167665886" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://tempuri.org/
+---
+{
+	ns0#Subtract: {
+		ns0#intA: payload.first,
+		ns0#intB: payload.second
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<wsc:consume operation="Subtract" doc:name="Subtract" doc:id="742a4171-b2a2-4342-a12d-1df0919cc955" config-ref="Web_Service_Consumer_Config" />
+		<logger level="INFO" doc:name="Logger" doc:id="fe1d5d59-81f3-4c13-b9e2-9301032b15ae" message="#[payload]" />
+		<ee:transform doc:name="Transform Message" doc:id="a6e30205-a56e-4d92-93e1-ccc86a21d174" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{ 
+	code: "200", 
+	message: "Subtract Operation Success", 
+	"data": {
+      "result": payload..SubtractResult[0]
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
 </mule>

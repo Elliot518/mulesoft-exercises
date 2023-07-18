@@ -159,19 +159,6 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="post:\subtract:application\json:operators-sapi-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  code: "200",
-  message: "Subtract Operation Success",
-  data: {
-    result: 6
-  }
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference - Subtract" doc:id="5f1521f6-a440-41c0-a3d2-87cce9e40dcd" name="operators-sapi-subtractFlow"/>
     </flow>
 </mule>
