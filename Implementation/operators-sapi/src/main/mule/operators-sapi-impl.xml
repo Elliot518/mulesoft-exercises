@@ -70,4 +70,36 @@ output application/json
 			</ee:message>
 		</ee:transform>
 	</flow>
+	<flow name="operators-sapi-multiplyFlow" doc:id="3e9a08b6-6e5b-4bf9-a1c4-62df642cb972" >
+		<ee:transform doc:name="Transform Message" doc:id="7e6f3e1e-0746-4146-9013-d2277ec82c7e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://tempuri.org/
+---
+{
+	ns0#Multiply: {
+		ns0#intA: payload.first,
+		ns0#intB: payload.second
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<wsc:consume operation="Multiply" doc:name="Multiply" doc:id="1b2ead72-2640-46b5-aeb4-d35e8d523a02" config-ref="Web_Service_Consumer_Config" />
+		<logger level="INFO" doc:name="Logger" doc:id="13ba445d-5004-47cd-9e6c-1299c05ff90c" message="#[payload]" />
+		<ee:transform doc:name="Transform Message" doc:id="0a31f5d4-373b-4d66-9be2-eb214bad75f6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{ 
+	code: "200", 
+	message: "Multiply Operation Success", 
+	"data": {
+      "result": payload..MultiplyResult[0]
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
 </mule>
