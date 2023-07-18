@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-	<configuration-properties doc:name="Configuration properties" doc:id="5d0c0ec2-bbc9-4b59-9d6d-4bb087848ff9" file="properties/${env}.yaml" />
-	<global-property doc:name="Global Property" doc:id="697e0ed6-1f08-41e1-a050-02f3e9e6fae7" name="env" value="local" />
+<mule xmlns:wsc="http://www.mulesoft.org/schema/mule/wsc" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/wsc http://www.mulesoft.org/schema/mule/wsc/current/mule-wsc.xsd">
+	<flow name="operators-sapi-addFlow" doc:id="6001a3a0-1e78-4621-b50c-e4f106b6bf7b" >
+		<ee:transform doc:name="Transform Message" doc:id="9ec85fd8-8d2c-4aae-8e54-14ff0918a673" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://tempuri.org/
+---
+{
+	ns0#Add: {
+		ns0#intA: payload.first,
+		ns0#intB: payload.second
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<wsc:consume doc:name="Add" doc:id="c397bfdf-a250-41b9-a9ee-c477025dc201" config-ref="Web_Service_Consumer_Config" operation="Add"/>
+		<logger level="INFO" doc:name="Logger" doc:id="73dcabbc-5c20-423c-bd29-820d34080af7" message="#[payload]"/>
+		<ee:transform doc:name="Transform Message" doc:id="364ef692-855c-4914-8251-9aaacc94cd21" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{ 
+	code: "200", 
+	message: "Add Operation Success", 
+	"data": {
+      "result": payload..AddResult[0]
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
 </mule>

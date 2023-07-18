@@ -124,20 +124,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="post:\add:application\json:operators-sapi-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  code: "200",
-  message: "Add Operation Success",
-  data: {
-    result: 10
-  }
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference - Add" doc:id="09bc86ed-1d06-4638-9f90-32b3b4179d2f" name="operators-sapi-addFlow"/>
     </flow>
     <flow name="post:\divide:application\json:operators-sapi-config">
         <ee:transform doc:name="Transform Message">
