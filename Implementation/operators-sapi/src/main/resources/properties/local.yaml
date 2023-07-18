@@ -1,0 +1,5 @@
+calculator:
+  wsdl: "http://www.dneonline.com/calculator.asmx?wsdl"
+  service: "Calculator"
+  port: "CalculatorSoap"
+  address: "http://www.dneonline.com/calculator.asmx"
