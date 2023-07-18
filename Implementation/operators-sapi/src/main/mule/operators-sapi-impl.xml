@@ -102,4 +102,36 @@ output application/json
 			</ee:message>
 		</ee:transform>
 	</flow>
+	<flow name="operators-sapi-divideFlow" doc:id="97efe9c4-4eee-436c-a506-c10bc5b2a1ac" >
+		<ee:transform doc:name="Transform Message" doc:id="c6ae0ae8-3684-4add-bab8-1ac4e3e3c548" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://tempuri.org/
+---
+{
+	ns0#Divide: {
+		ns0#intA: payload.first,
+		ns0#intB: payload.second
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<wsc:consume operation="Divide" doc:name="Divide" doc:id="c014fce5-fe57-42b2-a9aa-0617f6bb3e16" config-ref="Web_Service_Consumer_Config" />
+		<logger level="INFO" doc:name="Logger" doc:id="aa6b23ec-cd50-40fc-9e1d-13d8512337ee" message="#[payload]" />
+		<ee:transform doc:name="Transform Message" doc:id="5b5f1782-bc6b-4833-9010-b9242e6d6ebe" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{ 
+	code: "200", 
+	message: "Divide Operation Success", 
+	"data": {
+      "result": payload..DivideResult[0]
+    }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
 </mule>

@@ -127,20 +127,7 @@ output application/json
 		<flow-ref doc:name="Flow Reference - Add" doc:id="09bc86ed-1d06-4638-9f90-32b3b4179d2f" name="operators-sapi-addFlow"/>
     </flow>
     <flow name="post:\divide:application\json:operators-sapi-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  code: "200",
-  message: "Divide Operation Success",
-  data: {
-    result: 2
-  }
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference - Divide" doc:id="b3112361-4a30-41c0-bca1-9396fda17d17" name="operators-sapi-divideFlow"/>
     </flow>
     <flow name="post:\multiply:application\json:operators-sapi-config">
 		<flow-ref doc:name="Flow Reference - Multiply" doc:id="6286abdb-980a-4f02-9404-0a142bd25102" name="operators-sapi-multiplyFlow"/>
