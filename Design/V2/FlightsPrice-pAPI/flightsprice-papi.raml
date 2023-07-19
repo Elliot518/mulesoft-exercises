@@ -1,0 +1,34 @@
+#%RAML 1.0
+title: FlightsPrice-pAPI
+
+/flights:
+  /solded-price:
+
+    get:
+      description: Calculate and retrieve the total price of solded seats, grouped by airplane
+      queryParameters:
+        destination:
+          required: true
+          enum:
+            - SFO
+            - LAX
+            - CLE
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  "destination": "LAX",
+                  "planes": [
+                    {
+                      "type": "Boeing 777",
+                      "pricePerSeat": "180000$"
+                    },
+                    {
+                      "type": "Boeing 787",
+                      "pricePerSeat": "108200$"
+                    }
+                  ]
+                }
+
