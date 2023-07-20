@@ -124,40 +124,6 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\american-flights:americanflights-sapi-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-[
-  {
-    ID: 1,
-    code: "ER38sd",
-    price: 400,
-    departureDate: "2017/07/26",
-    origin: "CLE",
-    destination: "SFO",
-    emptySeats: 0,
-    plane: {
-      "type": "Boeing 737",
-      totalSeats: 150
-    }
-  }, 
-  {
-    ID: 2,
-    code: "ER45if",
-    price: 540.99,
-    departureDate: "2017/07/27",
-    origin: "SFO",
-    destination: "ORD",
-    emptySeats: 54,
-    plane: {
-      "type": "Boeing 777",
-      totalSeats: 300
-    }
-  }
-]]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference - AmericanFlights-sapi" doc:id="f9ec2d8d-2ac0-4519-b10c-d4e78222956a" name="americanflights-sapi-implFlow"/>
     </flow>
 </mule>

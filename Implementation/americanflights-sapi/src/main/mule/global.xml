@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="0912d3f8-3051-443d-9c3f-690115039861" file="properties/${env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="6eade717-f0ee-4d8c-9b43-3715b6e5f655" name="env" value="local" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="2a3826f8-57ad-454c-ac3f-938a6c37beab" >
+		<http:request-connection host="${american.host}"/>
+	</http:request-config>
+</mule>
