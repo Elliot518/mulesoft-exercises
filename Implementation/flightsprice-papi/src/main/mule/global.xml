@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<configuration-properties doc:name="Configuration properties" doc:id="7488e0f6-345a-497f-acff-172132fa7689" file="properties/${env}.yaml" />
+	<global-property doc:name="Global Property" doc:id="be4fca3e-9cb6-4df1-bad5-1ef171f5967b" name="env" value="local" />
+	<http:request-config name="HTTP_Request_configuration_AmericanFlights" doc:name="HTTP Request configuration" doc:id="0ab82ddc-df5d-4693-bf80-f68e82a09ab5" basePath="${american.basePath}">
+		<http:request-connection host="${american.host}" port="${american.port}" />
+	</http:request-config>
+</mule>

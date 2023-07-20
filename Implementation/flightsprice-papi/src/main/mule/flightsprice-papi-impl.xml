@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="flightsprice-papi-implFlow" doc:id="a0e268ad-55cd-4085-8ffc-d796b2e581ab" >
+		<http:request method="GET" doc:name="Request AmericanFlights-sAPI" doc:id="91ecb67c-3eee-43b0-a584-cf483382dca1" config-ref="HTTP_Request_configuration_AmericanFlights" path="/american-flights">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"destination" : attributes.queryParams.destination
+}]]]></http:query-params>
+		</http:request>
+		<set-variable value="" doc:name="flightList" doc:id="74c75a28-5241-46d5-9cf6-b726e4d3b6d8" variableName="flightList"/>
+	</flow>
+</mule>

@@ -1,0 +1,15 @@
+#calculator:
+#  host: "calculator-service-elliot.us-e2.cloudhub.io"
+#  basePath: "/api/calculators"
+  
+calculator:
+  host: "localhost"
+  port: "8081"
+  basePath: "/api"
+
+american:
+  host: "localhost"
+  port: "8082"
+  basePath: "/api"
+ 
+ 

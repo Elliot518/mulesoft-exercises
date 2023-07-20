@@ -1,5 +1,5 @@
 http:
-  port: "8081"
+  port: "8082"
 
 american:
   host: "training4-american-ws.cloudhub.io"

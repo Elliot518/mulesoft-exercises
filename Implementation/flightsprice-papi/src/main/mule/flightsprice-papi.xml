@@ -124,25 +124,6 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\flights\solded-price:flightsprice-papi-config">
-        <ee:transform doc:name="Transform Message">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  destination: "LAX",
-  planes: [
-    {
-      "type": "Boeing 777",
-      pricePerSeat: "180000\$"
-    }, 
-    {
-      "type": "Boeing 787",
-      pricePerSeat: "108200\$"
-    }
-  ]
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference - FlightsPrice" doc:id="eebeb8bf-6ecd-42cd-9d43-f78c2a7eb12b" name="flightsprice-papi-implFlow"/>
     </flow>
 </mule>
