@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="flightsprice-papi-implFlow" doc:id="a0e268ad-55cd-4085-8ffc-d796b2e581ab" >
 		<http:request method="GET" doc:name="Request AmericanFlights-sAPI" doc:id="91ecb67c-3eee-43b0-a584-cf483382dca1" config-ref="HTTP_Request_configuration_AmericanFlights" path="/american-flights">
 			<http:query-params ><![CDATA[#[output application/java
@@ -22,6 +23,18 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 			<http:request method="POST" doc:name="Request Solded Price" doc:id="5ce1864d-c1c6-42f9-a2f6-2106b1cbc983" config-ref="HTTP_Request_configuration_Operators" path="/multiply" target="soldedPrice" targetValue="#[payload.data.result]">
 				<http:body ><![CDATA[#[{ first: vars.soldedSeats, second: vars.price }]]]></http:body>
 			</http:request>
+			<ee:transform doc:name="Transform Message" doc:id="34cf75c3-b03a-46a8-b1f1-bf30837d9884" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	destination: payload.destination, 
+	planeType: payload.plane."type",
+	soldedPrice: vars.soldedPrice
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
 			<logger level="INFO" doc:name="Logger" doc:id="dbd9fb80-463b-4c02-a709-bc40a0da70d6" />
 		</foreach>
 	</flow>
