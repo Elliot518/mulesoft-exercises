@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	"destination" : attributes.queryParams.destination
 }]]]></http:query-params>
 		</http:request>
-		<set-variable value="" doc:name="flightList" doc:id="74c75a28-5241-46d5-9cf6-b726e4d3b6d8" variableName="flightList"/>
+		<set-variable value="#[[]]" doc:name="flightList" doc:id="74c75a28-5241-46d5-9cf6-b726e4d3b6d8" variableName="flightList"/>
 		<foreach doc:name="For Each" doc:id="b6a13324-3599-4a75-b244-2fd7bccedcf3" >
 			<set-variable value="#[payload.price]" doc:name="price" doc:id="c9e18c67-d5fc-4f41-b8ed-e0069981ec0a" variableName="price"/>
 			<set-variable value="#[0]" doc:name="soldedSeats" doc:id="28d468fd-84b7-455d-8767-79a50bacc978" variableName="soldedSeats"/>
@@ -35,7 +35,38 @@ output application/json
 }]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
-			<logger level="INFO" doc:name="Logger" doc:id="dbd9fb80-463b-4c02-a709-bc40a0da70d6" />
+			<ee:transform doc:name="Transform Message" doc:id="068b7dd6-492e-4452-b1cb-d7089ce93b9b" >
+				<ee:message >
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable variableName="flightList" ><![CDATA[%dw 2.0
+output application/java
+---
+vars.flightList ++ [payload]]]></ee:set-variable>
+				</ee:variables>
+			</ee:transform>
 		</foreach>
+		<ee:transform doc:name="Transform Message" doc:id="70ac623e-0473-4d36-8344-990b43dc6344" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+vars.flightList]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<ee:transform doc:name="Transform Message" doc:id="a3f1be6b-9080-4c33-8503-176bff632135" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	destination: payload[0].destination,
+	planes: payload groupBy $.planeType distinctBy $ pluck $ map {
+		"type": $[0].planeType,
+		"pricePerSeat": sum($.soldedPrice)
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 	</flow>
 </mule>
