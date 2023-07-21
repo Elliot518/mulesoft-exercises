@@ -19,6 +19,9 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 			<http:request method="POST" doc:name="Request Solded Seats" doc:id="32aece39-95e1-4e7b-9b40-6c5643dbf9cf" config-ref="HTTP_Request_configuration_Operators" path="/subtract" responseTimeout="300000" target="soldedSeats" targetValue="#[payload.data.result]">
 				<http:body ><![CDATA[#[{ first: payload.plane.totalSeats, second: payload.emptySeats }]]]></http:body>
 			</http:request>
+			<http:request method="POST" doc:name="Request Solded Price" doc:id="5ce1864d-c1c6-42f9-a2f6-2106b1cbc983" config-ref="HTTP_Request_configuration_Operators" path="/multiply" target="soldedPrice" targetValue="#[payload.data.result]">
+				<http:body ><![CDATA[#[{ first: vars.soldedSeats, second: vars.price }]]]></http:body>
+			</http:request>
 			<logger level="INFO" doc:name="Logger" doc:id="dbd9fb80-463b-4c02-a709-bc40a0da70d6" />
 		</foreach>
 	</flow>
