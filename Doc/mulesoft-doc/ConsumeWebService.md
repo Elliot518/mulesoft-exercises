@@ -21,4 +21,9 @@ Map the fields by dragging them from the input section and dropping them on the 
 
 ![Map the fields](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/MapFields.png)
 
+&nbsp;
+
+### 3. Combining data from multiple services
+
+To combine the data sets, you need to transform each of them to a canonical(标准的), or standard format(eg: Java Class or DataWeave format)
 
