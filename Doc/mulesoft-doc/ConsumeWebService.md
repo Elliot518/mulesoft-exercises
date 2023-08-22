@@ -7,5 +7,8 @@
 ### 1. Consume Soap Web Service
 
 - getDeltaFlights
-![findFlight](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/SoapCall_1.png)
+
+    Drag the codevariable in the input section to the destination elementin the output section
+    ![findFlight](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/SoapCall_1.png)
+
 
