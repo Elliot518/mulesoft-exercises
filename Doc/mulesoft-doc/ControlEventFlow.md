@@ -9,6 +9,9 @@
 - Choice(条件分支)
 > One route executed based on conditional logic
 
+Configure the Choice router
+![Configure the Choice router](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ConfigureChoice.png)
+
 - First Successful
 > Routes executed sequentially until one is successfully executed
 
