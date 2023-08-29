@@ -67,8 +67,12 @@ If there is no error handler defined, a Mule default error handler is used
 
 <hr>
 
-- On Error Propagate in child flow
+- On Error Propagate in both main flow and child flow
 > Main flow reference child flow, child flow is On Error Propagate
 
-![On Error Propagate in child flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/4_ErrorPropagateChildFlow.png)
+![On Error Propagate in both flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/4_ErrorPropagateChildFlow.png)
+
+<hr>
+
+- On Error Continue in main flow, On Error Propagate in child flow
 
