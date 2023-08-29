@@ -57,3 +57,9 @@ If there is no error handler defined, a Mule default error handler is used
 
 ![On Error Propagate in single flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/2_ErrorPropagateSingleFlow.png)
 
+<hr>
+
+
+- On Error Continue in single flow
+
+![On Error Continue in single flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/3_ErrorContinueSingleFlow.png)
