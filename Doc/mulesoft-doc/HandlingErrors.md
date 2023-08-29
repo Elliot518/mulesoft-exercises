@@ -42,3 +42,18 @@ If there is no error handler defined, a Mule default error handler is used
     - The rest of the flow that threw the error is not executed
     - The event is passed up to the next level as if the flow execution had completed successfully 
 - An HTTP Listener returns a **successful** response
+
+&nbsp;
+
+### 3. Main error handling scenarios
+
+- No error handler, taken over by Mule default error hanlder
+
+![Mule default error hanlder](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/1_NoHandlerByDefault.png)
+
+<hr>
+
+- On Error Propagate in single flow
+
+![On Error Propagate in single flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/2_ErrorPropagateSingleFlow.png)
+
