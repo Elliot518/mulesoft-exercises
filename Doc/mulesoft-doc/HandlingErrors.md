@@ -19,3 +19,26 @@ If there is no error handler defined, a Mule default error handler is used
 - Implicitly and globally handles all messaging errors thrown in Mule applications
 - Stops execution of the flow and logs information about the error
 - Cannot be configured
+
+&nbsp;
+
+
+### 2. Error handling scopes
+
+#### On Error Propagate
+
+- All processors in the error handling scope are executed
+- At the end of the scope 
+    - The rest of the flow that threw the error is not executed
+    - The error is rethrownup to the next level and handled there
+- An HTTP Listener returns an **error** response
+
+<hr>
+
+#### On Error Continue
+
+- All processors in the error handling scope are executed
+- At the end of the scope 
+    - The rest of the flow that threw the error is not executed
+    - The event is passed up to the next level as if the flow execution had completed successfully 
+- An HTTP Listener returns a **successful** response
