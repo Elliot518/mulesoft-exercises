@@ -169,3 +169,7 @@ eg: Scenario - HTTP:UNAUTHORIZED
 
 - Application default error handler – with a matching scope condition
 ![App Default Match](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/05_AppDefaultMatchCondition.png)
+
+&nbsp;
+
+### 8. Handle errors at the processor level
