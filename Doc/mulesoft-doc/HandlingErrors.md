@@ -143,7 +143,17 @@ eg: Scenario - HTTP:UNAUTHORIZED
 
 ![Error Handling Process](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingProcess.png)
 
+&nbsp;
 
+### 7. Application level error handling scenarios
 
+- Application Default No Match
+![App Default No Match](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/01_AppDefaultNoMatch.png)
 
+<hr>
+
+- Application default error handler – with a matching On Error Propagate scope condition
+![App Default Match Propagate](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/02_AppDefaultMatchPropagate.png)
+
+<hr>
 
