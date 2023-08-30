@@ -15,10 +15,22 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:request-config>
 	<configuration doc:name="Configuration" doc:id="3ad0228d-a6c3-4061-b489-e4ad436ee24f" defaultErrorHandler-ref="globalError_Handler" />
 	<error-handler name="globalError_Handler" doc:id="49a104d6-8155-4169-8984-a9d1daa0c2d8" >
-		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ae1d77bc-0e7d-489d-82fc-fcd00e0ca345" type="ANY">
-			<ee:transform doc:name="error.description" doc:id="4d093cf7-c755-4f6a-804b-df40ddfdb214" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="b75f2539-846a-462a-b3e0-c4634db306e1" type="HTTP:CONNECTIVITY,HTTP:BAD_REQUEST">
+			<ee:transform doc:name="Data unavailable" doc:id="9403fb18-d3d1-403e-9c20-408f78349c46" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": "Data unavailable. Try later. " ++ error.description as String
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-propagate>
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="cd3aac6e-fbcc-4e7e-a23c-298b05ae6048" type="ANY">
+			<ee:transform doc:name="error.description" doc:id="4d093cf7-c755-4f6a-804b-df40ddfdb214">
+				<ee:message>
+					<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
 {
@@ -26,6 +38,7 @@ output application/json
 }]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
-		</on-error-continue>
+		</on-error-propagate>
+		
 	</error-handler>
 </mule>
