@@ -113,9 +113,12 @@ If there is no error handler defined, a Mule default error handler is used
 ### 5. Handle specific types of errors
 
 5-1) Review the possible types of errors thrown by a HTTP Request
+
 ![Error Mapping](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorMapping.png)
 
 5-2) Add a second error handler scope to catch Web Service Consumer connectivity errors
+
 ![Error Types](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingWithTypes.png)
+
 
 
