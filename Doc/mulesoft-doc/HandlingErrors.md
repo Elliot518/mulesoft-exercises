@@ -95,3 +95,8 @@ If there is no error handler defined, a Mule default error handler is used
 4-3) In the On Error Continue properties view, click search button for type and select ANY
 ![Global Error Handler](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/GlobalErrorHandler.png)
 
+4-3) Set the payload in the error handler to a JSON message
+- Add a Transform Message component to the On Error Continue
+- Set the Transform Message display name to error.description
+- Inthe TransformMessage properties view, change the output type to application/json and give it a value of the error.description
+![Error Handling Message](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingMessage.png)

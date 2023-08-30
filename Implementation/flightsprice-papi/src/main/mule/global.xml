@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<configuration-properties doc:name="Configuration properties" doc:id="7488e0f6-345a-497f-acff-172132fa7689" file="properties/${env}.yaml" />
 	<global-property doc:name="Global Property" doc:id="be4fca3e-9cb6-4df1-bad5-1ef171f5967b" name="env" value="local" />
 	<http:request-config name="HTTP_Request_configuration_AmericanFlights" doc:name="HTTP Request configuration" doc:id="0ab82ddc-df5d-4693-bf80-f68e82a09ab5" basePath="${american.basePath}">
@@ -13,6 +14,17 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:request-connection host="${calculator.host}" port="${calculator.port}" />
 	</http:request-config>
 	<error-handler name="globalError_Handler" doc:id="49a104d6-8155-4169-8984-a9d1daa0c2d8" >
-		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ae1d77bc-0e7d-489d-82fc-fcd00e0ca345" type="ANY"/>
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ae1d77bc-0e7d-489d-82fc-fcd00e0ca345" type="ANY">
+			<ee:transform doc:name="error.description" doc:id="4d093cf7-c755-4f6a-804b-df40ddfdb214" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message": error.description
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+		</on-error-continue>
 	</error-handler>
 </mule>
