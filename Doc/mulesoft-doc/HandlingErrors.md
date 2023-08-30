@@ -108,4 +108,7 @@ If there is no error handler defined, a Mule default error handler is used
 - In the Global Element Properties dialog box, set the default error handler to globalError_Handler
 ![Set Global Error Handler](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/SetGlobalErrorHandler.png)
 
+&nbsp;
+
+### 5. Handle specific types of errors
 
