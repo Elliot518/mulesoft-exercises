@@ -136,3 +136,14 @@ eg: Scenario - HTTP:UNAUTHORIZED
 ```
 
 ![Error Condition](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorCondition.png)
+
+&nbsp;
+
+### 6. Error Handling Process
+
+![Error Handling Process](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingProcess.png)
+
+
+
+
+
