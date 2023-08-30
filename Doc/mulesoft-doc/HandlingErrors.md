@@ -125,12 +125,10 @@ If there is no error handler defined, a Mule default error handler is used
 
 5-3) Specifying scope execution upon a specific condition
 
-- Set the whencondition to a Boolean DataWeave expression
+- Set the when condition to a Boolean DataWeave expression
 
-eg:
+eg: Scenario - HTTP:UNAUTHORIZED
 ```
-Scenario: HTTP:UNAUTHORIZED
-
 1. error.errorType.namespace == 'HTTP'
 2. error.errorType.identifier == 'UNAUTHORIZED'
 3. error.cause.message contains 'request unauthorized'
