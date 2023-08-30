@@ -165,3 +165,7 @@ eg: Scenario - HTTP:UNAUTHORIZED
 - Application Default is not matched
 ![App Default No Match](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/04_AppDefaultNoMatch.png)
 
+<hr>
+
+- Application default error handler – with a matching scope condition
+![App Default Match](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/05_AppDefaultMatchCondition.png)
