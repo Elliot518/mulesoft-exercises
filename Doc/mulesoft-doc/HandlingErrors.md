@@ -100,3 +100,12 @@ If there is no error handler defined, a Mule default error handler is used
 - Set the Transform Message display name to error.description
 - Inthe TransformMessage properties view, change the output type to application/json and give it a value of the error.description
 ![Error Handling Message](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingMessage.png)
+
+4-4) Set a default error handler for the application
+- In the Global Elements viewof global.xml, click Create
+- Select Global Configurations > Configuration and click OK
+![Select Global Configuration](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/SelectGlobalConfiguration.png)
+- In the Global Element Properties dialog box, set the default error handler to globalError_Handler
+![Set Global Error Handler](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/SetGlobalErrorHandler.png)
+
+
