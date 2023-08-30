@@ -116,9 +116,25 @@ If there is no error handler defined, a Mule default error handler is used
 
 ![Error Mapping](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorMapping.png)
 
-5-2) Add a second error handler scope to catch Web Service Consumer connectivity errors
+
+5-2) Specifying scope execution for specific error types
+
+- Add a second error handler scope to catch http request errors
 
 ![Error Types](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorHandlingWithTypes.png)
 
+5-3) Specifying scope execution upon a specific condition
 
+- Set the whencondition to a Boolean DataWeave expression
 
+eg:
+```
+Scenario: HTTP:UNAUTHORIZED
+
+1. error.errorType.namespace == 'HTTP'
+2. error.errorType.identifier == 'UNAUTHORIZED'
+3. error.cause.message contains 'request unauthorized'
+4. error.cause.classcontains 'http'
+```
+
+![Error Condition](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/ErrorCondition.png)
