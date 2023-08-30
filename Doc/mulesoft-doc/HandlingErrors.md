@@ -157,3 +157,5 @@ eg: Scenario - HTTP:UNAUTHORIZED
 
 <hr>
 
+- Application default error handler – with a matching On Error Continue scope condition
+![App Default Match Continue](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/03_AppDefaultMatchContinue.png)
