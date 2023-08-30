@@ -45,7 +45,7 @@ If there is no error handler defined, a Mule default error handler is used
 
 &nbsp;
 
-### 3. Main error handling scenarios
+### 3. Flow level error handling scenarios
 
 - No error handler, taken over by Mule default error hanlder
 
@@ -83,3 +83,15 @@ If there is no error handler defined, a Mule default error handler is used
 - Whatever in main flow, On Error Continue in child flow
 
 ![On Error Continue in child flow](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/6_ContinueInChild.png)
+
+&nbsp;
+
+### 4. Handle errors at the application level
+
+4-1) Drag "Error Handler" component and drop it in the canvas of global.xml
+
+4-2) Drag "On Error Continue" component and drop it in globalError_Handler you just dragged on the canvas
+
+4-3) In the On Error Continue properties view, click search button for type and select ANY
+![Global Error Handler](https://raw.githubusercontent.com/Elliot518/mcp-oss-repo/main/mulesoft/training/GlobalErrorHandler.png)
+

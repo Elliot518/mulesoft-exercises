@@ -12,4 +12,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:request-config name="HTTP_Request_configuration_Operators" doc:name="HTTP Request configuration" doc:id="22ef08ba-39c5-4a51-a2d4-4b57576c0f5c" basePath="${calculator.basePath}" >
 		<http:request-connection host="${calculator.host}" port="${calculator.port}" />
 	</http:request-config>
+	<error-handler name="globalError_Handler" doc:id="49a104d6-8155-4169-8984-a9d1daa0c2d8" >
+		<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ae1d77bc-0e7d-489d-82fc-fcd00e0ca345" type="ANY"/>
+	</error-handler>
 </mule>
