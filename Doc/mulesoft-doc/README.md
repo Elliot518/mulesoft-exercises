@@ -13,3 +13,12 @@
 [4. Validating Events](ValidatingEvents.md)
 
 [5. Handling Errors](HandlingErrors.md)
+
+
+<hr>
+
+## Some Other Topics
+
+[1. Secure Configuration Properties](Security/SecureConfigProps.md)
+
+
