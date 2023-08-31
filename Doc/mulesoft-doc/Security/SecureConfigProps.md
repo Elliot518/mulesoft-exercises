@@ -10,9 +10,7 @@ MuleSoft Secure Properties Tools: <br />
 
 <hr>
 
-### 1. What is MuleSoft
-
-#### 1-1) Encrypt Yaml File
+### 1. Encrypt Yaml File
 
 - java command
   ```shell
@@ -42,9 +40,9 @@ MuleSoft Secure Properties Tools: <br />
   example2: "![En8lII21ZHrdIaINw0+mSA==]"
   ```
 
-<hr>
+&nbsp;
 
-#### 1-2) Encrypt Properties File
+### 2. Encrypt Properties File
 
 - java command
   ```shell
@@ -69,3 +67,13 @@ MuleSoft Secure Properties Tools: <br />
   properties.example1.value=![qCReIPK3jcqD7WR84ISSIQ==]
   properties.example2=![En8lII21ZHrdIaINw0+mSA==]
   ```
+
+&nbsp;
+
+### 3. Reference
+
+MuleSoft Official Doc: <br />
+<a href="https://docs.mulesoft.com/mule-runtime/4.4/secure-configuration-properties">https://docs.mulesoft.com/mule-runtime/4.4/secure-configuration-properties</a>
+
+
+
