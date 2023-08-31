@@ -12,7 +12,7 @@ MuleSoft Secure Properties Tools: <br />
 
 ### 1. Encrypt Yaml File
 
-- java command
+- java command (shell)
   ```shell
   java -cp secure-properties-tool.jar com.mulesoft.tools.SecurePropertiesTool \
   file \
@@ -21,6 +21,18 @@ MuleSoft Secure Properties Tools: <br />
   CBC \
   mulesoft \
   example_in.yaml \
+  example_out.yaml
+  ```
+
+- java command (windows)
+  ```shell
+  java -cp secure-properties-tool.jar com.mulesoft.tools.SecurePropertiesTool ^
+  file ^
+  encrypt ^
+  Blowfish ^
+  CBC ^
+  mulesoft ^
+  example_in.yaml ^
   example_out.yaml
   ```
 
@@ -44,7 +56,7 @@ MuleSoft Secure Properties Tools: <br />
 
 ### 2. Encrypt Properties File
 
-- java command
+- java command (shell)
   ```shell
   java -cp secure-properties-tool.jar com.mulesoft.tools.SecurePropertiesTool \
   file \
@@ -53,6 +65,18 @@ MuleSoft Secure Properties Tools: <br />
   CBC \
   mulesoft \
   example_in.properties \
+  example_out.properties
+  ```
+
+- java command (windows)
+  ```shell
+  java -cp secure-properties-tool.jar com.mulesoft.tools.SecurePropertiesTool ^
+  file ^
+  encrypt ^
+  Blowfish ^
+  CBC ^
+  mulesoft ^
+  example_in.properties ^
   example_out.properties
   ```
 
@@ -74,6 +98,4 @@ MuleSoft Secure Properties Tools: <br />
 
 MuleSoft Official Doc: <br />
 <a href="https://docs.mulesoft.com/mule-runtime/4.4/secure-configuration-properties">https://docs.mulesoft.com/mule-runtime/4.4/secure-configuration-properties</a>
-
-
 
