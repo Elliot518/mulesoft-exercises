@@ -4,6 +4,12 @@
 
 <hr>
 
+
+MuleSoft Secure Properties Tools: <br />
+<a href="https://docs.mulesoft.com/mule-runtime/4.4/_attachments/secure-properties-tool.jar">Secure Properties Tool Jar file</a>
+
+<hr>
+
 ### 1. What is MuleSoft
 
 #### 1-1) Encrypt Yaml File
