@@ -8,9 +8,12 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="990e1353-5752-415e-94db-3b87e0c15673" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="7aae915d-3b45-441c-bffb-d8cbb98471a5" >
+		<http:request-connection host="localhost" port="8082" />
+	</http:request-config>
 	<flow name="munit-papiFlow" doc:id="62682bc8-6d6d-44c3-bd3e-0895a3facb6f" >
 		<http:listener doc:name="Listener" doc:id="5f4c2ffe-b361-409b-87ed-26fe58730106" path="/munit-papi" config-ref="HTTP_Listener_config"/>
-		<logger level="INFO" doc:name="Logger" doc:id="41ba9fb3-99c2-48e5-aeaa-6a0ee7febd88" />
+		<logger level="INFO" doc:name="Logger" doc:id="41ba9fb3-99c2-48e5-aeaa-6a0ee7febd88" message=" send a request to sapi"/>
 		<ee:transform doc:name="Transform Message" doc:id="fcabc8de-56f0-4cac-96d7-b0d1cb4aa09c" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -23,8 +26,8 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="e1b281ff-fa7c-4dd0-9687-c2b6be29866e" />
-		<http:request method="GET" doc:name="Request" doc:id="4ae2ea28-1cf7-4369-b6b1-56e5aaf536b8" />
-		<logger level="INFO" doc:name="Print the response" doc:id="35b4d151-ee3e-4a28-ba1d-581436c882bc" />
+		<logger level="INFO" doc:name="Logger" doc:id="e1b281ff-fa7c-4dd0-9687-c2b6be29866e" message="#[output application/json&#10;---&#10;payload]"/>
+		<http:request method="POST" doc:name="Request" doc:id="4ae2ea28-1cf7-4369-b6b1-56e5aaf536b8" config-ref="HTTP_Request_configuration" path="/munit-sapi"/>
+		<logger level="INFO" doc:name="Print the response" doc:id="35b4d151-ee3e-4a28-ba1d-581436c882bc" message="#[output application/json&#10;---&#10;payload]"/>
 	</flow>
 </mule>
