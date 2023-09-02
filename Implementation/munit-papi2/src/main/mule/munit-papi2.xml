@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="38badbe8-ccae-43d7-b3ff-998a42480887" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="46672c13-aed9-473b-b32e-b92520dfa3b2" >
+		<http:request-connection host="localhost" port="8082" />
+	</http:request-config>
+	<flow name="munit-papiFlow-errorContinue" doc:id="574d1417-6414-409e-b6b4-8995e87ce00e" >
+		<http:listener doc:name="Listener" doc:id="e0a86875-428f-47d6-9882-c7e5fd1e8b42" config-ref="HTTP_Listener_config" path="/munit-papi2" />
+		<logger level="INFO" doc:name="Logger" doc:id="162126b5-8638-4f28-b189-36d1d64daa80" message=" send a request to sapi" />
+		<ee:transform doc:name="Transform Message" doc:id="85b22a97-fbae-4829-8a87-d6f3a3812376" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"firstName": attributes.queryParams.firstName,
+	"lastName": attributes.queryParams.lastName,
+	"age": attributes.queryParams.age
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="afff76e8-a911-4cea-b25c-d6e72ffa3036" message="#[output application/json&#10;---&#10;payload]" />
+		<http:request method="POST" doc:name="Request" doc:id="cac206a0-00d7-4429-94ae-559d836d4536" config-ref="HTTP_Request_configuration" path="/munit-sapi" />
+		<logger level="INFO" doc:name="Print the response" doc:id="d02ea2e3-e9fb-4137-bc8d-0e9f36ccc0eb" message="#[output application/json&#10;---&#10;payload]" />
+	</flow>
+</mule>

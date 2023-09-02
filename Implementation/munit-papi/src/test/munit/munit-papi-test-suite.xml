@@ -23,7 +23,7 @@
 			<munit:set-event doc:name="Set Event" doc:id="0c9fb55b-d9a8-480a-bb49-6408d849a408" >
 				<munit:attributes value='#["queryParams": {"firstName": "Elliot", "lastName": "Gu", "age": 28}]' />
 			</munit:set-event>
-			<flow-ref doc:name="Flow-ref to munit-papiFlow" doc:id="0de52bbd-0c12-4381-a7a1-8c98c2bf7028" name="munit-papiFlow"/>
+			<flow-ref doc:name="Flow-ref to munit-papiFlow" doc:id="0de52bbd-0c12-4381-a7a1-8c98c2bf7028" name="munit-papiFlow-errorContinue"/>
 		</munit:execution>
 		<munit:validation >
 			<munit-tools:assert doc:name="Assert expression" doc:id="e3586d98-10b2-4433-b3d0-f9912e8bc23d" >
@@ -48,7 +48,7 @@ payload.status must contain("success")]]]></munit-tools:that>
 			<munit:set-event doc:name="Set Event" doc:id="206c3450-40a3-400d-bac6-e7b2c5b9375d" >
 				<munit:attributes value='#["queryParams": {"firstName": "Elliot", "lastName": "Gu", "age": 28}]' />
 			</munit:set-event>
-			<flow-ref doc:name="Flow-ref to munit-papiFlow" doc:id="a1f90a8e-c86a-4ec0-ba5b-f4fad6a6c76d" name="munit-papiFlow"/>
+			<flow-ref doc:name="Flow-ref to munit-papiFlow" doc:id="a1f90a8e-c86a-4ec0-ba5b-f4fad6a6c76d" name="munit-papiFlow-errorContinue"/>
 		</munit:execution>
 		<munit:validation >
 			<munit-tools:assert doc:name="Assert expression" doc:id="838a5e27-4c7b-49cd-904b-3be1a24369fb" >

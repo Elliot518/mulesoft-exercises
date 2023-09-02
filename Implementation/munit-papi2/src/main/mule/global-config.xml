@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<configuration doc:name="Configuration" doc:id="4bb1c3d4-d14c-456f-8592-59850ce82337" defaultErrorHandler-ref="global-configError_Handler" />
+	<error-handler name="global-configError_Handler" doc:id="21d84ff7-d2dc-4ae0-a65a-9ac2626dd72d" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="ea738b63-3876-42dd-a40a-3f58a89b0e74" >
+			<ee:transform doc:name="Transform Message" doc:id="9071458d-bc4a-4281-967f-ac4b336ac67f" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"status": "error"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<logger level="INFO" doc:name="Logger" doc:id="efe21933-524d-41b2-926d-0e0be4f9fddc" />
+		</on-error-propagate>
+	</error-handler>
+</mule>
