@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="46672c13-aed9-473b-b32e-b92520dfa3b2" >
 		<http:request-connection host="localhost" port="8082" />
 	</http:request-config>
-	<flow name="munit-papiFlow-errorContinue" doc:id="574d1417-6414-409e-b6b4-8995e87ce00e" >
+	<flow name="munit-papiFlow-errorPropagate" doc:id="574d1417-6414-409e-b6b4-8995e87ce00e" >
 		<http:listener doc:name="Listener" doc:id="e0a86875-428f-47d6-9882-c7e5fd1e8b42" config-ref="HTTP_Listener_config" path="/munit-papi2" />
 		<logger level="INFO" doc:name="Logger" doc:id="162126b5-8638-4f28-b189-36d1d64daa80" message=" send a request to sapi" />
 		<ee:transform doc:name="Transform Message" doc:id="85b22a97-fbae-4829-8a87-d6f3a3812376" >
