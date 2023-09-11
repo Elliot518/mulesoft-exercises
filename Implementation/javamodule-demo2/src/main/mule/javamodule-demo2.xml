@@ -11,7 +11,12 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="javamodule-demo2Flow" doc:id="d2b8b8b5-a57e-4bff-80eb-ddf3b2d0945e" >
 		<http:listener doc:name="Listener" doc:id="2dc53ff3-6dcc-43b3-ab27-0e0f9a31e947" config-ref="HTTP_Listener_config" path="/javademo2"/>
-		<java:new constructor="TutorialsMcp()" doc:name="New" doc:id="5785b07a-9433-4763-bffb-b5185f8f853b" class="com.mcp.mulesoft.javamodule.TutorialsMcp" target="myObject"/>
+		<java:new constructor="TutorialsMcp()" doc:name="New" doc:id="5785b07a-9433-4763-bffb-b5185f8f853b" class="com.mcp.mulesoft.javamodule.TutorialsMcp" target="myObject">
+			<java:args ><![CDATA[#[%dw 2.0
+output application/java
+---
+name: attributes.queryParams.marks]]]></java:args>
+		</java:new>
 		<java:invoke doc:name="Invoke" doc:id="197c8d40-f327-45ee-bb4c-d5f7e9b4405b" instance="#[vars.myObject]" class="com.mcp.mulesoft.javamodule.TutorialsMcp" method="getResult(int)">
 			<java:args ><![CDATA[#[%dw 2.0
 output application/java
