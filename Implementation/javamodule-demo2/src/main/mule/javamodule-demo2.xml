@@ -6,18 +6,19 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c4dd303a-9ec5-474e-a3a1-8b5cca3a86d3" >
-		<http:listener-connection host="0.0.0.0" port="8099" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="acb5113b-8e36-4529-b75b-688c136d80f4" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="javamodule-demoFlow" doc:id="2043fa73-a04e-4a1e-b359-8655d0bede77" >
-		<http:listener doc:name="Listener" doc:id="64098005-c78f-438f-9ebb-2bab4f59bf7e" path="/javademo" config-ref="HTTP_Listener_config"/>
-		<java:invoke-static doc:name="Invoke static" doc:id="c294dcd1-fda1-4a39-9fcf-91725504a625" class="com.mcp.mulesoft.javamodule.TutorialsMcp" method="getAge(java.lang.String)">
+	<flow name="javamodule-demo2Flow" doc:id="d2b8b8b5-a57e-4bff-80eb-ddf3b2d0945e" >
+		<http:listener doc:name="Listener" doc:id="2dc53ff3-6dcc-43b3-ab27-0e0f9a31e947" config-ref="HTTP_Listener_config" path="/javademo2"/>
+		<java:new constructor="TutorialsMcp()" doc:name="New" doc:id="5785b07a-9433-4763-bffb-b5185f8f853b" class="com.mcp.mulesoft.javamodule.TutorialsMcp" target="myObject"/>
+		<java:invoke doc:name="Invoke" doc:id="197c8d40-f327-45ee-bb4c-d5f7e9b4405b" instance="#[vars.myObject]" class="com.mcp.mulesoft.javamodule.TutorialsMcp" method="getResult(int)">
 			<java:args ><![CDATA[#[%dw 2.0
 output application/java
 ---
-name: attributes.queryParams.name]]]></java:args>
-		</java:invoke-static>
-		<ee:transform doc:name="Transform Message" doc:id="82eef028-a561-43aa-a3c9-059f2e5dacfd" >
+marks: attributes.queryParams.marks]]]></java:args>
+		</java:invoke>
+		<ee:transform doc:name="Transform Message" doc:id="db0607a8-d71d-4119-be58-3985aca8607d" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
