@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:java="http://www.mulesoft.org/schema/mule/java"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c4dd303a-9ec5-474e-a3a1-8b5cca3a86d3" >
+		<http:listener-connection host="0.0.0.0" port="8099" />
+	</http:listener-config>
+	<flow name="javamodule-demoFlow" doc:id="2043fa73-a04e-4a1e-b359-8655d0bede77" >
+		<http:listener doc:name="Listener" doc:id="64098005-c78f-438f-9ebb-2bab4f59bf7e" path="/demo" config-ref="HTTP_Listener_config"/>
+		<java:invoke-static doc:name="Invoke static" doc:id="c294dcd1-fda1-4a39-9fcf-91725504a625" class="com.mcp.mulesoft.javamodule.TutorialsMcp" method="getAge(java.lang.String)">
+			<java:args ><![CDATA[#[%dw 2.0
+output application/java
+---
+name: attributes.queryParams.name]]]></java:args>
+		</java:invoke-static>
+		<ee:transform doc:name="Transform Message" doc:id="82eef028-a561-43aa-a3c9-059f2e5dacfd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Response": payload
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
