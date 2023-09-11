@@ -26,10 +26,12 @@ marks: attributes.queryParams.marks]]]></java:args>
 		<ee:transform doc:name="Transform Message" doc:id="db0607a8-d71d-4119-be58-3985aca8607d" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
+import java!com::mcp::mulesoft::javamodule::MyUtils
+
 output application/json
 ---
 {
-	"Response": payload
+	"Response": MyUtils::reformat(payload)
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
