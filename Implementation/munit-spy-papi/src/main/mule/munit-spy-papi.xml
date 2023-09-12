@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="baf7bdb4-c21d-4581-a16b-50255e7e70a9" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="63e7b60e-31ad-4bd3-afb8-7d73f1672e3b" >
+		<http:request-connection host="localhost" port="8082" />
+	</http:request-config>
+	<flow name="munit-papiFlow-errorContinue" doc:id="c02584bd-31b4-4ced-b051-da4455553674" >
+		<http:listener doc:name="Listener" doc:id="7ef74681-6b8b-435a-872a-4f5c559aa7fd" config-ref="HTTP_Listener_config" path="/munit-papi" />
+		<logger level="INFO" doc:name="Logger - input payload" doc:id="14fb5eec-34fe-493f-b1a6-605d69c43924" message=" send a request to sapi" />
+		<ee:transform doc:name="Transform Message" doc:id="74877cba-f68b-42a6-920c-69fe1c54cda6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"firstName": attributes.queryParams.firstName,
+	"lastName": attributes.queryParams.lastName,
+	"age": attributes.queryParams.age
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger - Transformed payload" doc:id="d48ed9b1-7ce8-4a92-9a4d-c1fa47f0cff0" message="#[output application/json&#10;---&#10;payload]" />
+		<until-successful maxRetries="3" doc:name="Until Successful" doc:id="962e797e-6838-43e2-905f-049b0280aec3" millisBetweenRetries="5000">
+			<logger level="INFO" doc:name="Logger" doc:id="cdaa1938-fdd4-4daf-8139-741513d62d8c" message="#[output application/json&#10;---&#10;payload]" />
+			<http:request method="POST" doc:name="Request - to sapi" doc:id="0e8140ff-7026-4ee4-b8f4-31a27e4da306" config-ref="HTTP_Request_configuration" path="/munit-sapi" />
+		</until-successful>
+	</flow>
+</mule>
