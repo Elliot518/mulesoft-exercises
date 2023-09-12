@@ -12,24 +12,41 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:request-connection host="localhost" port="8082" />
 	</http:request-config>
 	<flow name="munit-papiFlow-errorContinue" doc:id="c02584bd-31b4-4ced-b051-da4455553674" >
-		<http:listener doc:name="Listener" doc:id="7ef74681-6b8b-435a-872a-4f5c559aa7fd" config-ref="HTTP_Listener_config" path="/munit-papi" />
-		<logger level="INFO" doc:name="Logger - input payload" doc:id="14fb5eec-34fe-493f-b1a6-605d69c43924" message=" send a request to sapi" />
+		<http:listener doc:name="Listener" doc:id="7ef74681-6b8b-435a-872a-4f5c559aa7fd" config-ref="HTTP_Listener_config" path="/munit-spy-papi" />
+		<logger level="INFO" doc:name="Logger - input payload" doc:id="14fb5eec-34fe-493f-b1a6-605d69c43924" message="#[payload]" />
 		<ee:transform doc:name="Transform Message" doc:id="74877cba-f68b-42a6-920c-69fe1c54cda6" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
 {
-	"firstName": attributes.queryParams.firstName,
-	"lastName": attributes.queryParams.lastName,
-	"age": attributes.queryParams.age
+	"EmployeeDetails": payload.Name ++ "_" ++ payload.Gender
 }]]></ee:set-payload>
 			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="vName" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.Name]]></ee:set-variable>
+				<ee:set-variable variableName="vAge" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.Age]]></ee:set-variable>
+				<ee:set-variable variableName="vGender" ><![CDATA[%dw 2.0
+output application/json
+---
+payload.Gender]]></ee:set-variable>
+			</ee:variables>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger - Transformed payload" doc:id="d48ed9b1-7ce8-4a92-9a4d-c1fa47f0cff0" message="#[output application/json&#10;---&#10;payload]" />
 		<until-successful maxRetries="3" doc:name="Until Successful" doc:id="962e797e-6838-43e2-905f-049b0280aec3" millisBetweenRetries="5000">
-			<logger level="INFO" doc:name="Logger" doc:id="cdaa1938-fdd4-4daf-8139-741513d62d8c" message="#[output application/json&#10;---&#10;payload]" />
+			<logger level="INFO" doc:name="Logger" doc:id="cdaa1938-fdd4-4daf-8139-741513d62d8c" message="logger in util successful"/>
 			<http:request method="POST" doc:name="Request - to sapi" doc:id="0e8140ff-7026-4ee4-b8f4-31a27e4da306" config-ref="HTTP_Request_configuration" path="/munit-sapi" />
 		</until-successful>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="8fcf4015-aa9d-425e-9fe6-d3a2ec69f8d9" >
+				<logger level="INFO" doc:name="Logger" doc:id="0d477fb0-4161-4d4d-9f58-cf5b01bd68d1" />
+			</on-error-continue>
+		</error-handler>
 	</flow>
 </mule>
